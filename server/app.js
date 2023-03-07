@@ -1,12 +1,18 @@
-const express = require('express');
-const app = express();
+const grpc = require('grpc')
+const notesProto = grpc.load('../server/notes.proto')
+const notes = [
+    { id: '1', title: 'Note 1', content: 'Content 1' },
+    { id: '2', title: 'Note 2', content: 'Content 2' }
+]
+const server = new grpc.Server();
+server.addService(notesProto.NoteService.service, {
+    list: (_, callback) => {
+        callback(null, notes)
+    },
+})
+server.bind('127.0.0.1:50051', grpc.ServerCredentials.createInsecure())
+console.log('Server running at http://127.0.0.1:50051')
+server.start()
 
-const PORT = 3333;
-
-app.get('/', (request, response) => {
-    response.send('alo?');
-});
-
-app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`);
-});
+//* Fontes
+//  - https://www.mundojs.com.br/2020/07/31/introducao-ao-grpc-com-node-js/

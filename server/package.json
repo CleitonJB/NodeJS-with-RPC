@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/CleitonJB/NodeJS-with-RPC/issues"
   },
-  "homepage": "https://github.com/CleitonJB/NodeJS-with-RPC#readme"
+  "homepage": "https://github.com/CleitonJB/NodeJS-with-RPC#readme",
+  "dependencies": {
+    "grpc": "^1.24.11"
+  }
 }
