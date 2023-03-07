@@ -5,3 +5,8 @@ server/package-lock.json
 # Client
 client/node_modules
 client/package-lock.json
+
+
+# Client-2
+client-2/node_modules
+client-2/package-lock.json
