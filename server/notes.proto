@@ -18,8 +18,8 @@ message Note {
 }
 
 message Resultado {
-   string valor = 1;
-   string juros = 2;
+   string valorInicial = 1;
+   string jurosMensal = 2;
    string meses = 3;
    string jurosComposto = 4;
    string montante = 5;

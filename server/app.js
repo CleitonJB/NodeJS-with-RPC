@@ -17,7 +17,7 @@ server.addService(notesProto.NoteService.service, {
         // console.log("Parâmetros: ", _.request);
 
         // console.log(`\n${JSON.stringify(_.call)}\n`);
-        console.log(`\n IP do cliente: (${_.getPeer()})`);
+        console.log(`\nIP do cliente: (${_.getPeer()})`);
 
         const resultado = calcularJuros(_.request.valor, _.request.juros);
         
@@ -40,7 +40,13 @@ function calcularJuros(valor, juros) {
         porcentagem = valorMensal / valor;
     }
 
-    return { valor: parseFloat(valor).toString(), juros: juros.toString(), meses: '6', jurosComposto: porcentagem.toString(), montante: parseFloat(capitalTotal).toString() };
+    return { 
+        valorInicial:  parseFloat(valor).toString(), 
+        jurosMensal:   juros.toString(), 
+        meses:         '6', 
+        jurosComposto: (parseFloat(capitalTotal) - parseFloat(valor)).toString(), 
+        montante:      parseFloat(capitalTotal).toString() 
+    };
 }
 
 server.bind(`127.0.0.1:50051`, grpc.ServerCredentials.createInsecure());
