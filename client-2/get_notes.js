@@ -1,5 +1,5 @@
-//* Importando o modulo criado no passo anterior
-//* Chamando o metodo List RPC e retornando os dados na console
+//* Importar o modulo criado
+//* Chamar o método 'Calcular' RPC e retornar os dados no console
 
 const client = require('./client-grpc')
 const prompt = require('prompt-sync')();
@@ -7,13 +7,10 @@ const prompt = require('prompt-sync')();
 var valor = prompt('Valor (reais) para ser investido por 6 meses: ');
 var juros = prompt('Percentual de juros mensal: ');
 
-// console.log(`Montante: ${valor}\n`);
-// console.log(`Juros: ${juros}\n`);
-
 client.calcular({ valor, juros }, (error, dados) => {
     if (!error) {
         const data = dados.resultado[0];
-        //console.log(data);
+        
         console.log("\nResultado final:");
         console.log(`- Valor inicial investido (reais): R$ ${data.valorInicial}`);
         console.log(`- Juros mensal (porcentagem): ${data.jurosMensal} %`);
