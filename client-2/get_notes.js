@@ -7,21 +7,13 @@ const prompt = require('prompt-sync')();
 var valor = prompt('Valor (reais) para ser investido por 6 meses: ');
 var juros = prompt('Percentual de juros mensal: ');
 
-console.log(`Montante: ${valor}\n`);
-console.log(`Juros: ${juros}\n`);
+// console.log(`Montante: ${valor}\n`);
+// console.log(`Juros: ${juros}\n`);
 
-// client.list({}, (error, notes) => {
-//     if (!error) {
-//         console.log(notes)
-//     } else {
-//         console.error(error)
-//     }
-// });
-
-client.calcular({valor, juros}, (error, notes) => {
+client.calcular({ valor, juros }, (error, resultado) => {
     if (!error) {
-        console.log(notes)
+        console.log(resultado);
     } else {
-        console.error(error)
+        console.error(error);
     }
 });
