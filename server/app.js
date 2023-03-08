@@ -13,15 +13,32 @@ server.addService(notesProto.NoteService.service, {
         callback(null, notes)
     },
     calcular: (_, callback) => {
-        console.log("Calculando papai");
-        console.log(_.request);
+        console.log("Parâmetros: ", _.request);
 
-        callback(null, { resultado: {valor: '1', juros: '2', meses: '3', jurosComposto: '4', montante: '5'}})
+        const resultado = calcularJuros(_.request.valor, _.request.juros);
+
+        callback(null, { resultado });
     },
 });
 
-server.bind('127.0.0.1:50051', grpc.ServerCredentials.createInsecure());
-console.log('Servidor rodando em http://127.0.0.1:50051');
+function calcularJuros(valor, juros) {
+    let capitalTotal = 0;
+    let valorMensal  = 0;
+    let porcentagem  = 0;
+
+    for(let i = 1; i <= 6; i++) {
+        capitalTotal = valor * (1 + juros / 100) ** i;
+
+        valorMensal = capitalTotal - valor;
+  
+        porcentagem = valorMensal / valor;
+    }
+
+    return { valor: parseFloat(valor).toString(), juros: juros.toString(), meses: '6', jurosComposto: porcentagem.toString(), montante: parseFloat(capitalTotal).toString() };
+}
+
+server.bind(`127.0.0.1:50051`, grpc.ServerCredentials.createInsecure());
+console.log(`Servidor rodando em http://127.0.0.1:50051`);
 server.start();
 
 //* Fontes
