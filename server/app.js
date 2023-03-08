@@ -13,11 +13,17 @@ server.addService(notesProto.NoteService.service, {
         callback(null, notes)
     },
     calcular: (_, callback) => {
-        console.log("Parâmetros: ", _.request);
+        console.time("Tempo de processamento");
+        // console.log("Parâmetros: ", _.request);
+
+        // console.log(`\n${JSON.stringify(_.call)}\n`);
+        console.log(`\n IP do cliente: (${_.getPeer()})`);
 
         const resultado = calcularJuros(_.request.valor, _.request.juros);
-
+        
         callback(null, { resultado });
+
+        console.timeEnd("Tempo de processamento");
     },
 });
 
